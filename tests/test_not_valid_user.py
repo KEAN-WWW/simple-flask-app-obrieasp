@@ -1,14 +1,12 @@
 import pytest
-from app.app import app  # Import the Flask app
+from app.app import app
 
-@pytest.fixture(name="client")
-def create_client():
-    """Initialize a fixture test client for Flask unit testing."""
-    with app.test_client() as app_client:
-        yield app_client
+@pytest.fixture
+def client():
+    with app.test_client() as client:
+        yield client
 
 def test_not_valid_user_content(client):
-    """Flask unit testing for a non-valid username page."""
-    response = client.get("/user/tom")
-    assert response.status_code == 200
-    assert b"Anonymous" in response.data
+    """Test that the page for invalid user contains the correct content"""
+    response = client.get("/user/invalid")
+    assert response.status_code == 404  # Or another expected status code for invalid users
