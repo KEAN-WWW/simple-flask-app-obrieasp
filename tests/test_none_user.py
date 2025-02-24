@@ -1,10 +1,9 @@
-# tests/test_none_user.py
 import pytest
 from app.app import app  # Import the Flask app
 
 @pytest.fixture
 def client():
-    """Fixture to create a test client"""
+    """Fixture to create a test client for Flask"""
     with app.test_client() as client:
         yield client
 
