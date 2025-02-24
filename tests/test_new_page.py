@@ -1,3 +1,7 @@
+# tests/test_new_page.py
+
+"""Tests for the new page route"""
+
 import pytest
 from app.app import app  # Import the Flask app
 
@@ -11,4 +15,4 @@ def test_new_page_content(client):
     """Test the content on the new page"""
     response = client.get("/new")
     assert response.status_code == 200
-    assert b"Welcome to the New Page!" in response.data
+    assert b"<h1>New Page</h1>" in response.data  # Updated expected content

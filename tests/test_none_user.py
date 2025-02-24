@@ -1,3 +1,7 @@
+# tests/test_none_user.py
+
+"""Tests for handling a non-existent user"""
+
 import pytest
 from app.app import app  # Import the Flask app
 
