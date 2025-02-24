@@ -1,7 +1,5 @@
 # tests/test_valid_user.py
-
 """Tests for validating user page content"""
-
 import pytest
 from app.app import app  # Import the Flask app
 
@@ -17,4 +15,4 @@ def test_valid_user_content(client):
     assert response.status_code == 200  # Expect 200 OK status
 
     # Update the assertion to match the actual response content
-    assert b"<h1>Hello, jack!</h1>" in response.data  # Adjusted expected output
+    assert b"<h1>Hello, Jack!</h1>" in response.data
