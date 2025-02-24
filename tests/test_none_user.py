@@ -1,12 +1,14 @@
+# tests/test_none_user.py
 import pytest
-from app.app import app
+from app.app import app  # Import the Flask app
 
 @pytest.fixture
 def client():
+    """Fixture to create a test client"""
     with app.test_client() as client:
         yield client
 
-def test_none_user_content(client):
-    """Test that a nonexistent user shows a proper error message"""
+def test_none_user(client):
+    """Test with a user who does not exist"""
     response = client.get("/user/none")
-    assert response.status_code == 404  # Adjust based on expected behavior
+    assert response.status_code == 404  # Expecting 404 for non-existent user

@@ -1,25 +1,27 @@
-from flask import Flask, jsonify
+# app/app.py
+from flask import Flask, render_template, abort
 
-# Create the Flask app
+# Initialize the Flask app
 app = Flask(__name__)
 
-# Sample route for the main page
 @app.route('/')
-def home():
-    return "<h1>Welcome to the Main Page</h1>"
+def main_page():
+    """Main page route"""
+    return "<h1>Welcome to the Main Page!</h1>"
 
-# Route for the user page (valid user)
-@app.route('/user/<username>')
-def user(username):
-    if username == "jack":
-        return f"<h1>Hello {username}</h1>"  # Example valid user response
-    else:
-        return jsonify(error="User not found"), 404
-
-# Route for the new page
-@app.route('/new_page')
+@app.route('/new')
 def new_page():
+    """Route for the new page"""
     return "<h1>New Page</h1>"
+
+@app.route('/user/<username>')
+def user_page(username):
+    """Route for a valid user"""
+    # For now, simulate the validation
+    valid_users = ['jack', 'john', 'jane']
+    if username not in valid_users:
+        abort(404)  # Return 404 if the user is not valid
+    return f"<h1>Hello, {username}!</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)
