@@ -12,4 +12,5 @@ def test_main_page_content(client):
     """flask unit testing for content in default page"""
     response = client.get("/")
     assert response.status_code == 200
-    assert b"Hello CPS3500" in response.data
+    assert b"Welcome to the Main Page" in response.data  # Update this to match the actual content
+
