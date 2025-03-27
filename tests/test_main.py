@@ -1,13 +1,15 @@
+"""This is a test script to test flask application"""
 import pytest
-from app import create_app
+from app.app import app
 
-@pytest.fixture
-def client():
-    app = create_app()
-    with app.test_client() as client:
-        yield client
+@pytest.fixture(name="client")
+def create_client():
+    """initialize a fixture test client for flask unit testing"""
+    with app.test_client() as app_client:
+        yield app_client
 
-def test_home_page(client):
+def test_main_page_content(client):
+    """flask unit testing for content in default page"""
     response = client.get("/")
     assert response.status_code == 200
-    assert b"Welcome to the Home Page" in response.data
+    assert b"Hello CPS3500" in response.data

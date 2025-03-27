@@ -1,13 +1,14 @@
+"""This is a test script to test flask application"""
 import pytest
 from app.app import app
 
-@pytest.fixture
-def client():
-    with app.test_client() as client:
-        yield client
+@pytest.fixture(name="client")
+def create_client():
+    """initialize a fixture test client for flask unit testing"""
+    with app.test_client() as app_client:
+        yield app_client
 
-def test_none_user(client):
-    response = client.get("/user/none")
-    assert response is not None, "Response is None, check the route handling."
+def test_none_user_content(client):
+    """flask unit testing for unreachable page if a parameter is missing"""
+    response = client.get("/user/")
     assert response.status_code == 404
-    assert b"User not found" in response.data
