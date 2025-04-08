@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page</title>
 </head>
 <body>
-    <h1>
-        {% if username == 'jack' %}
-            Hello, {{ username.upper() }}!
+    {% if new_page %}
+        <h1>This is the new page!</h1>
+    {% elif username %}
+        {% if username.lower() == "jack" %}
+            <h1>Welcome, {{ username.capitalize() }}!</h1>
         {% else %}
-            Hi, Anonymous!
+            <h1>Hello, {{ username }}!</h1>
         {% endif %}
-    </h1>
+    {% else %}
+        <h1>No user provided.</h1>
+    {% endif %}
 </body>
 </html>
