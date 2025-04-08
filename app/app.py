@@ -1,23 +1,18 @@
-from flask import Flask, render_template, request
-
+""" Flask Methods """
+from flask import Flask, render_template
 app = Flask(__name__)
 
-valid_users = ["jack", "jill", "alice"]
-
 @app.route("/")
-def home():
-    return "Welcome to the homepage"
+def hello():
+    return "Hello, CPS3500!"
+
+@app.route("/new_page")
+def newpage():
+    return "This is the new page!"
 
 @app.route("/user/<username>")
-def greet_user(username):
-    if username.lower() == "none":
-        return "No user provided", 400
+def user(username):
+    return render_template("user.html", username=username)
 
-    if username.lower() in valid_users:
-        return render_template("user.html", username=username)
-    else:
-        return "Invalid user", 403
-
-@app.route("/new")
-def new_page():
-    return render_template("user.html", new_page=True)
+if __name__ == "__main__":
+    app.run(debug = True)
